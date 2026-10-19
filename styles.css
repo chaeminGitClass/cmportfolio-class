@@ -58,7 +58,7 @@ h1 em, h2 em { font-style: normal; color: inherit; }
 .timeline div { display: grid; grid-template-columns: 125px 1fr; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 11px; }.timeline span { color: #9a9891; font-family: "DM Mono", monospace; font-size: 10px; }.timeline strong { color: var(--ink); font-weight: 600; }
 .work { padding-bottom: 160px; }.work-heading { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }.section-note { color: var(--muted); font-size: 12px; line-height: 1.8; text-align: right; margin-bottom: 4px; }
 .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.project-card { overflow: hidden; }.project-visual { position: relative; height: 380px; overflow: hidden; }.project-lime .project-visual { background: var(--lime); }.project-coral .project-visual { background: var(--coral); }.project-blue .project-visual { background: var(--blue); }
+.project-card { overflow: hidden; cursor: pointer; border-radius: 2px; transition: transform .25s ease, box-shadow .25s ease; }.project-card:hover { transform: translateY(-5px); }.project-card:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }.project-visual { position: relative; height: 380px; overflow: hidden; }.project-lime .project-visual { background: var(--lime); }.project-coral .project-visual { background: var(--coral); }.project-blue .project-visual { background: var(--blue); }
 .visual-label { position: absolute; z-index: 1; top: 22px; left: 24px; font-family: "DM Mono", monospace; font-size: 9px; letter-spacing: .07em; }.visual-number { position: absolute; right: 24px; bottom: 20px; font-family: "DM Mono", monospace; font-size: 11px; }
 .phone-mockup { position: absolute; width: 195px; height: 280px; left: 50%; top: 57%; padding: 20px 16px; transform: translate(-50%, -50%) rotate(-9deg); background: #f8f7f2; border-radius: 19px; box-shadow: 13px 16px 0 rgba(21,21,21,.12); }.phone-top { display: flex; justify-content: space-between; font: 8px "DM Mono", monospace; }.phone-mockup p { margin-top: 39px; font-size: 10px; }.phone-mockup strong { display: block; margin-top: 5px; font-size: 21px; letter-spacing: -.08em; }.mini-chart { height: 58px; display: flex; gap: 5px; align-items: flex-end; border-bottom: 1px solid #aaa; }.mini-chart i { display: block; width: 17px; background: var(--lime); }.mini-chart i:nth-child(1) { height: 28%; }.mini-chart i:nth-child(2) { height: 55%; }.mini-chart i:nth-child(3) { height: 42%; }.mini-chart i:nth-child(4) { height: 70%; }.mini-chart i:nth-child(5) { height: 50%; }.mini-chart i:nth-child(6) { height: 83%; }.mini-chart i:nth-child(7) { height: 100%; }
 .commerce-window { position: absolute; top: 83px; left: 18%; width: 72%; height: 240px; padding: 18px; background: #f6e8dc; box-shadow: 12px 14px 0 rgba(21,21,21,.1); transform: rotate(5deg); }.window-dot { display: inline-block; width: 6px; height: 6px; margin-right: 4px; border-radius: 50%; background: var(--coral); }.product-photo { display: grid; place-items: center; height: 113px; margin-top: 15px; color: #ef866b; background: #e7b8a1; font-size: 65px; }.product-photo small { position: absolute; right: 12px; top: 86px; font: 8px/1.3 "DM Mono", monospace; }.commerce-window p { margin: 13px 0; font-size: 13px; line-height: 1.1; }.commerce-window strong { font-size: 20px; letter-spacing: -.08em; }
@@ -67,4 +67,36 @@ h1 em, h2 em { font-style: normal; color: inherit; }
 .contact { padding: 130px 0 140px; border-top: 1px solid var(--line); }.contact-top h2 { margin-top: 26px; font-size: clamp(44px, 7vw, 86px); }.contact-bottom { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 90px; }.contact-bottom p { color: var(--muted); font-size: 13px; line-height: 1.8; }.contact-email { font-size: clamp(18px, 3vw, 30px); letter-spacing: -.06em; font-weight: 700; border-bottom: 2px solid var(--ink); }.contact-email span { font-size: .7em; }
 .site-footer { display: flex; justify-content: space-between; padding: 22px 0 30px; border-top: 1px solid var(--line); color: var(--muted); font: 9px "DM Mono", monospace; }.footer-links { display: flex; gap: 25px; }
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s ease; }.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.modal-open { overflow: hidden; }
+.project-modal { position: fixed; z-index: 20; inset: 0; }
+.project-modal[hidden] { display: none; }
+.modal-backdrop { display: grid; place-items: center; width: 100%; height: 100%; padding: 24px; overflow-y: auto; background: rgba(21, 21, 21, .58); }
+.modal-dialog { position: relative; width: min(100%, 680px); max-height: min(760px, 100%); overflow-y: auto; padding: 48px; background: var(--paper); box-shadow: 0 20px 70px rgba(21, 21, 21, .2); }
+.modal-close { position: absolute; top: 16px; right: 18px; display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); background: transparent; font: 28px/1 var(--sans); cursor: pointer; }
+.modal-close:hover { background: var(--lime); }
+.modal-close:focus-visible, .modal-dialog:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.modal-dialog > .eyebrow { margin: 0 0 14px; }
+.modal-dialog > h2 { margin: 0; font-size: clamp(32px, 6vw, 52px); line-height: 1.1; letter-spacing: -.07em; }
+.modal-description { margin: 14px 0 12px; color: var(--muted); font-size: 15px; }
+.modal-example-note { padding: 10px 12px; color: #514b34; background: #ece8d8; font-size: 12px; }
+.modal-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
+.modal-detail-grid section { padding-top: 16px; border-top: 1px solid var(--line); }
+.modal-detail-grid h3 { margin: 0 0 9px; font-size: 14px; }
+.modal-detail-grid p, .modal-detail-grid ul { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.modal-detail-grid ul { padding-left: 18px; }
+.modal-outcome { grid-column: 1 / -1; }
+@media (max-width: 760px) {
+  .modal-backdrop { align-items: end; padding: 12px; }
+  .modal-dialog { width: 100%; max-height: 88dvh; padding: 42px 24px 28px; }
+  .modal-close { top: 12px; right: 12px; }
+  .modal-detail-grid { gap: 18px; margin-top: 22px; }
+}
+@media (max-width: 420px) {
+  .modal-detail-grid { grid-template-columns: 1fr; }
+  .modal-outcome { grid-column: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-card { transition: none; }
+  .project-card:hover { transform: none; }
+}
 @media (max-width: 760px) { .section-shell, .site-header { width: min(100% - 40px, 600px); }.site-header { height: 72px; }.main-nav { display: none; }.header-link { font-size: 10px; }.hero { min-height: 720px; align-items: flex-start; padding-top: 95px; }.hero-art { top: 370px; right: 1%; width: 82vw; }.scroll-cue { bottom: 22px; }.about { padding: 90px 0; display: block; }.about-content { margin-top: 55px; }.work { padding-bottom: 100px; }.work-heading { display: block; margin-bottom: 35px; }.section-note { margin-top: 25px; text-align: left; }.project-grid { grid-template-columns: 1fr; gap: 58px; }.project-visual { height: 360px; }.contact { padding: 90px 0; }.contact-bottom { display: block; margin-top: 55px; }.contact-email { display: inline-block; margin-top: 20px; }.site-footer { display: block; }.footer-links { margin-top: 18px; gap: 15px; } }

@@ -74,7 +74,7 @@
         <p class="section-note">각 프로젝트를 통해<br>배운 것들을 기록합니다.</p>
       </div>
       <div class="project-grid">
-        <article class="project-card project-lime reveal">
+        <article class="project-card project-lime reveal" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="project-modal" aria-label="monee 프로젝트 상세 정보 보기" data-project-id="monee">
           <div class="project-visual visual-banking">
             <span class="visual-label">MONEY, MADE SIMPLE</span>
             <div class="phone-mockup">
@@ -90,7 +90,7 @@
             <div class="tags"><span>Product design</span><span>UX strategy</span></div>
           </div>
         </article>
-        <article class="project-card project-coral reveal reveal-delay">
+        <article class="project-card project-coral reveal reveal-delay" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="project-modal" aria-label="Onda market 프로젝트 상세 정보 보기" data-project-id="onda">
           <div class="project-visual visual-commerce">
             <span class="visual-label">SHOP YOUR WAY</span>
             <div class="commerce-window">
@@ -106,7 +106,7 @@
             <div class="tags"><span>Brand experience</span><span>Web design</span></div>
           </div>
         </article>
-        <article class="project-card project-blue reveal reveal-delay-more">
+        <article class="project-card project-blue reveal reveal-delay-more" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="project-modal" aria-label="playground 프로젝트 상세 정보 보기" data-project-id="playground">
           <div class="project-visual visual-content">
             <span class="visual-label">MAKE TIME FOR WHAT MATTERS</span>
             <div class="content-shape shape-one"></div>
@@ -134,6 +134,32 @@
       </div>
     </section>
   </main>
+
+  <div class="project-modal" id="project-modal" hidden>
+    <div class="modal-backdrop" data-modal-backdrop>
+      <section class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-example-note" tabindex="-1">
+        <button class="modal-close" type="button" aria-label="프로젝트 상세 정보 닫기">×</button>
+        <p class="eyebrow">Project details</p>
+        <h2 id="modal-title"></h2>
+        <p class="modal-description" id="modal-description"></p>
+        <p class="modal-example-note" id="modal-example-note">아래 상세 정보는 실제 프로젝트 정보가 아닌 이해를 돕기 위한 예시입니다.</p>
+        <div class="modal-detail-grid">
+          <section>
+            <h3>담당 역할</h3>
+            <p id="modal-role"></p>
+          </section>
+          <section>
+            <h3>사용 기술</h3>
+            <ul id="modal-technologies"></ul>
+          </section>
+          <section class="modal-outcome">
+            <h3>주요 성과</h3>
+            <p id="modal-outcome"></p>
+          </section>
+        </div>
+      </section>
+    </div>
+  </div>
 
   <footer class="site-footer section-shell">
     <span>© <span id="current-year">2024</span> CHAEMIN HAN</span>
