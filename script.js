@@ -15,6 +15,61 @@ const revealObserver = new IntersectionObserver(
 
 revealItems.forEach((item) => revealObserver.observe(item));
 
+const contactForm = document.querySelector("#contact-form");
+
+if (contactForm) {
+  const contactFields = [
+    { input: contactForm.querySelector("#contact-name"), label: "이름" },
+    { input: contactForm.querySelector("#contact-email"), label: "이메일" },
+    { input: contactForm.querySelector("#contact-message"), label: "메시지" }
+  ];
+  const formStatus = contactForm.querySelector("#contact-form-status");
+
+  function clearFieldError(input) {
+    input.removeAttribute("aria-invalid");
+    contactForm.querySelector(`#${input.id}-error`).textContent = "";
+  }
+
+  contactFields.forEach(({ input }) => {
+    input.addEventListener("input", () => {
+      clearFieldError(input);
+      formStatus.textContent = "";
+    });
+  });
+
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    formStatus.textContent = "";
+
+    const invalidFields = [];
+
+    contactFields.forEach(({ input, label }) => {
+      clearFieldError(input);
+      const value = input.value.trim();
+      let errorMessage = "";
+
+      if (!value) {
+        errorMessage = `${label} 항목을 입력해 주세요.`;
+      } else if (input.type === "email" && !input.checkValidity()) {
+        errorMessage = "올바른 이메일 주소를 입력해 주세요.";
+      }
+
+      if (errorMessage) {
+        input.setAttribute("aria-invalid", "true");
+        contactForm.querySelector(`#${input.id}-error`).textContent = errorMessage;
+        invalidFields.push(input);
+      }
+    });
+
+    if (invalidFields.length > 0) {
+      invalidFields[0].focus();
+      return;
+    }
+
+    formStatus.textContent = "모든 항목이 올바르게 입력되었습니다. 실제 이메일은 전송되지 않았습니다.";
+  });
+}
+
 const projectDetails = {
   monee: {
     name: "monee",
