@@ -1,6 +1,24 @@
 const year = document.querySelector("#current-year");
 if (year) year.textContent = new Date().getFullYear();
 
+const themeToggle = document.querySelector("#theme-toggle");
+const savedTheme = localStorage.getItem("portfolio-theme");
+
+function setTheme(theme) {
+  const isDark = theme === "dark";
+  document.body.dataset.theme = isDark ? "dark" : "light";
+  themeToggle.setAttribute("aria-pressed", String(isDark));
+  themeToggle.setAttribute("aria-label", isDark ? "라이트 모드로 전환" : "다크 모드로 전환");
+  themeToggle.querySelector(".theme-toggle-icon").textContent = isDark ? "☀" : "☾";
+}
+
+setTheme(savedTheme === "dark" ? "dark" : "light");
+themeToggle.addEventListener("click", () => {
+  const nextTheme = document.body.dataset.theme === "dark" ? "light" : "dark";
+  setTheme(nextTheme);
+  localStorage.setItem("portfolio-theme", nextTheme);
+});
+
 const revealItems = document.querySelectorAll(".reveal");
 const revealObserver = new IntersectionObserver(
   (entries, observer) => {
